@@ -1,18 +1,18 @@
-import {Text, Button, View} from 'react-native';
+import {Button} from 'react-native';
 import * as React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-
+import Box from '../components/box';
+import BoxCenter from '../components/box-center';
 
 function SearchView({navigation}) {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <BoxCenter>
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate('Detail')}
       />
-    </View>
+      <Box size={20} bg="blue" mt={20} />
+    </BoxCenter>
   );
 }
-
 
 export default SearchView;

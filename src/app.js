@@ -23,8 +23,6 @@ function SearchStack() {
   );
 }
 
-
-
 function App() {
   return (
     <NavigationContainer>
