@@ -13,7 +13,7 @@ function SvgSearch(props) {
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="search_svg__feather search_svg__feather-search"
+      className=""
       {...props}>
       <Circle cx={11} cy={11} r={8} />
       <Path d="M21 21l-4.35-4.35" />
