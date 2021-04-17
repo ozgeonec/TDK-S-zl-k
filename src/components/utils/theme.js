@@ -5,6 +5,7 @@ const radii = {
 };
 const colors = {
   red: '#E11E3C',
+  textLight: '#E8EAED',
 };
 
 export default {

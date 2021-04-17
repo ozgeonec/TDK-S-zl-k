@@ -1,9 +1,10 @@
 ﻿import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 
 import Button from './button';
 import {Search, Bookmark, RotateCcw} from './icons';
 import Box from './box';
+import theme from './utils/theme';
 
 function TabBar({state, descriptors, navigation}) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
@@ -38,13 +39,12 @@ function TabBar({state, descriptors, navigation}) {
         };
 
         return label === 'Search' ? (
-          <Box pd={15} mt={15} borderRadius={9999} bg="white">
+          <Box pd={30} mt={-15} size={56} borderRadius={999} bg="white">
             <Button
               key={label}
               bg="red"
-              borderRadius={999999}
-              size={20}
-              flex={1}
+              size={56}
+              borderRadius={999}
               onPress={onPress}>
               <Search stroke="white" />
             </Button>
@@ -52,13 +52,26 @@ function TabBar({state, descriptors, navigation}) {
         ) : (
           <Button
             key={label}
-            pt={6}
             flexDirection="column"
+            size={56}
             flex={1}
             onPress={onPress}>
-            {label === 'History' && <RotateCcw />}
-            {label === 'Favorite' && <Bookmark />}
-            <Box size={3} bg={isFocused ? 'red' : 'white'} mt={6} />
+            {label === 'History' && (
+              <RotateCcw
+                color={isFocused ? theme.colors.red : theme.colors.textLight}
+              />
+            )}
+            {label === 'Favorite' && (
+              <Bookmark
+                color={isFocused ? theme.colors.red : theme.colors.textLight}
+              />
+            )}
+            <Box
+              size={6}
+              bg={isFocused ? 'red' : 'white'}
+              mt={1}
+              borderRadius={999}
+            />
           </Button>
         );
       })}
