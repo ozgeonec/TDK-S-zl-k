@@ -3,18 +3,21 @@ import * as React from "react";
 import BoxCenter from "../components/box-center";
 import { Logo } from "../components/icons";
 import SearchBox from "../components/SearchBox";
+import Box from "../components/box";
 
 
 function SearchView({ navigation }) {
   return (
-    <BoxCenter bg="atasozleriLight" >
+    <Box bg="atasozleriLight" >
       <Button
         title="Go to Details"
         onPress={() => navigation.navigate("Detail")}
       />
-      <Logo color="red" />
+      <Box py={20}>
+      <Logo color="red" width={120} />
+      </Box>
       <SearchBox/>
-    </BoxCenter>
+    </Box>
   );
 }
 

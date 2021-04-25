@@ -6,7 +6,7 @@ import Input from "./Input";
 function SearchBox() {
   return (
     <Box>
-      <Input placeholder="hello" placeholderTextColor="white" bg="red" color="white"/>
+      <Input bg="white" color="white" placeholder="hello" placeholderTextColor="atasozleriDark"/>
       <Text mt={20}>
         Selam
       </Text>
