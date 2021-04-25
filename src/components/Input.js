@@ -5,8 +5,11 @@ import {
   size,
   compose,
   space,
-  typography
+  typography,
+  borderRadius,
+  shadow
 } from 'styled-system';
+
 import theme from '../components/utils/theme';
 
 const Input = styled(TextInput).attrs(props => ({
@@ -16,7 +19,9 @@ const Input = styled(TextInput).attrs(props => ({
     color,
     size,
     space,
-    typography
+    typography,
+    borderRadius,
+    shadow
   )
 );
 
