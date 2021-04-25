@@ -1,12 +1,12 @@
-﻿import React from 'react';
-import {View} from 'react-native';
+﻿import React from "react";
+import { View } from "react-native";
 
-import Button from './button';
-import {Search, Bookmark, RotateCcw} from './icons';
-import Box from './box';
-import theme from './utils/theme';
+import Button from "./button";
+import { Search, Bookmark, RotateCcw } from "./icons";
+import Box from "./box";
+import theme from "./utils/theme";
 
-function TabBar({state, descriptors, navigation}) {
+function TabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
 
   if (focusedOptions.tabBarVisible === false) {
@@ -14,9 +14,9 @@ function TabBar({state, descriptors, navigation}) {
   }
 
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={{ flexDirection: "row" }}>
       {state.routes.map((route, index) => {
-        const {options} = descriptors[route.key];
+        const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
@@ -28,7 +28,7 @@ function TabBar({state, descriptors, navigation}) {
 
         const onPress = () => {
           const event = navigation.emit({
-            type: 'tabPress',
+            type: "tabPress",
             target: route.key,
             canPreventDefault: true,
           });
@@ -38,14 +38,15 @@ function TabBar({state, descriptors, navigation}) {
           }
         };
 
-        return label === 'Search' ? (
-          <Box pd={30} mt={-15} size={56} borderRadius={999} bg="white">
+        return label === "Search" ? (
+          <Box key={label} p={15} mt={-15} ml={0} size={76} borderRadius={999} bg="white">
             <Button
-              key={label}
               bg="red"
               size={56}
+              ml={-5}
               borderRadius={999}
-              onPress={onPress}>
+              onPress={onPress}
+            >
               <Search stroke="white" />
             </Button>
           </Box>
@@ -55,20 +56,21 @@ function TabBar({state, descriptors, navigation}) {
             flexDirection="column"
             size={56}
             flex={1}
-            onPress={onPress}>
-            {label === 'History' && (
+            onPress={onPress}
+          >
+            {label === "History" && (
               <RotateCcw
                 color={isFocused ? theme.colors.red : theme.colors.textLight}
               />
             )}
-            {label === 'Favorite' && (
+            {label === "Favorite" && (
               <Bookmark
                 color={isFocused ? theme.colors.red : theme.colors.textLight}
               />
             )}
             <Box
               size={6}
-              bg={isFocused ? 'red' : 'white'}
+              bg={isFocused ? "red" : "white"}
               mt={1}
               borderRadius={999}
             />
@@ -78,4 +80,5 @@ function TabBar({state, descriptors, navigation}) {
     </View>
   );
 }
+
 export default TabBar;
