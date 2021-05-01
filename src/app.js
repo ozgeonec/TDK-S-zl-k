@@ -22,7 +22,7 @@ const Tab = createBottomTabNavigator();
 
 function SearchStack() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator headerMode="none">
       <HomeStack.Screen name="Search" component={SearchView} />
       <HomeStack.Screen name="Detail" component={DetailView} />
     </HomeStack.Navigator>
@@ -32,7 +32,6 @@ function SearchStack() {
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Box flex={1} as={SafeAreaView}>
         <NavigationContainer>
           <Tab.Navigator
             initialRouteName="Search"
@@ -42,7 +41,6 @@ function App() {
             <Tab.Screen name="Favorite" component={FavoriteView} />
           </Tab.Navigator>
         </NavigationContainer>
-      </Box>
     </ThemeProvider>
   );
 }

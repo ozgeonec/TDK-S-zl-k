@@ -70,8 +70,8 @@ function TabBar({ state, descriptors, navigation }) {
             )}
             <Box
               size={6}
-              bg={isFocused ? "red" : "white"}
-              mt={1}
+              bg={isFocused ? "red" : "transparent"}
+              mt={6}
               borderRadius={999}
             />
           </Button>
