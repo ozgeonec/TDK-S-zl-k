@@ -56,15 +56,16 @@ function SearchView() {
 
       </Box>
 
-      <Box flex={1} bg="white" pt={26}>
-        {isSearchFocus ? (<Box p={30} flex={1}>
-          <Text>
-            History
-          </Text>
-        </Box>) : (
+      <Box flex={1} bg="white" pt={isSearchFocus ? 0 : 26}>
+        {isSearchFocus ? (
           <Box p={30} flex={1}>
             <Text>
-            Öneri
+              History
+            </Text>
+          </Box>) : (
+          <Box p={30} flex={1}>
+            <Text>
+              Öneri
             </Text>
           </Box>)}
       </Box>
