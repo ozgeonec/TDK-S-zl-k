@@ -1,11 +1,20 @@
-import {Text, View} from 'react-native';
+import { StatusBar, Text } from "react-native";
 import * as React from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Box from "../components/box";
 
 function HistoryView() {
+
+  useFocusEffect(
+    React.useCallback(() => {
+      StatusBar.setBarStyle('dark-content')
+    },[]));
+
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <Box as={SafeAreaView} flex={1}>
       <Text>Arama Geçmişi</Text>
-    </View>
+    </Box>
   );
 }
 export default HistoryView;

@@ -14,7 +14,14 @@ function TabBar({ state, descriptors, navigation }) {
   }
 
   return (
-    <View style={{ flexDirection: "row" }}>
+    <Box flexDirection="row"
+         pb={20}
+         bg="white"
+         style={{
+      shadowColor: '#000',
+      shadowOpacity: 0.1,
+      shadowRadius: 20}}
+    >
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -77,7 +84,7 @@ function TabBar({ state, descriptors, navigation }) {
           </Button>
         );
       })}
-    </View>
+    </Box>
   );
 }
 

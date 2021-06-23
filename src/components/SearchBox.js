@@ -17,6 +17,22 @@ function SearchBox({ onChangeFocus }) {
   //   onChangeFocus(isFocus);
   // }, [isFocus, onChangeFocus]);
 
+  // React.useEffect(() => {
+  //   Keyboard.addListener('keyboardDidShow', keyboardDidShow)
+  //   Keyboard.addListener('keyboardDidHide', keyboardDidHide)
+  //   return function() {
+  //     Keyboard.removeListener('keyboardDidShow', keyboardDidShow)
+  //     Keyboard.removeListener('keyboardDidHide', keyboardDidHide)
+  //   }
+  // })
+  //
+  // const keyboardDidShow = () => {
+  //   onChangeFocus(true)
+  // }
+  //
+  // const keyboardDidHide = () => {
+  //   onChangeFocus(false)
+  // }
   const onCancel = () => {
     setFocus(false);
     Keyboard.dismiss();
@@ -29,7 +45,7 @@ function SearchBox({ onChangeFocus }) {
       <Box position="relative" flex={1}>
         <Input
           style={{
-            shadowColor: '#000',
+            shadowColor: '#000000',
             shadowOpacity: 0.1,
             shadowRadius: 24,
             shadowOffset: {
