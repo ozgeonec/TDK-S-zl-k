@@ -38,24 +38,38 @@ const DATA = [
   },
 ];
 
-function SearchView() {
+function SearchView({ navigation }) {
 
   const [isSearchFocus, setSearchFocus] = React.useState(false);
   const [heroHeightAnim] = useState(new Animated.Value(285));
+  const [bgOpacity] = useState(new Animated.Value(1));
 
   React.useEffect(() => {
     if (isSearchFocus) {
+      Animated.timing(bgOpacity, {
+        toValue: 0,
+        duration: 320,
+        useNativeDriver: false
+      }).start();
       Animated.timing(heroHeightAnim, {
         toValue: 124,
         duration: 320,
+        useNativeDriver: false
       }).start();
     } else {
+      Animated.timing(bgOpacity, {
+        toValue: 1,
+        duration: 320,
+        useNativeDriver: false
+      }).start();
       Animated.timing(heroHeightAnim, {
         toValue: 285,
         duration: 320,
+        useNativeDriver: false
       }).start();
     }
-  }, [heroHeightAnim, isSearchFocus]);
+  }, [heroHeightAnim, isSearchFocus, bgOpacity]);
+
   useFocusEffect(
     React.useCallback(() => {
       StatusBar.setBarStyle(isSearchFocus ? "dark-content" : "light-content");
@@ -66,7 +80,7 @@ function SearchView() {
     <Box flex={1}>
       <Box as={Animated.View} position="relative" zIndex={1} height={heroHeightAnim}>
 
-        {!isSearchFocus && (
+        <Box as={Animated.View} opacity={bgOpacity}>
           <Background>
             <Box flex={1}
                  alignItems="center"
@@ -74,8 +88,7 @@ function SearchView() {
               <Logo color="white" width={120} />
             </Box>
           </Background>
-        )}
-
+        </Box>
 
         <Box position="absolute" left={0} bottom={isSearchFocus ? 0 : -42} p={16} width="100%">
           <SearchBox onChangeFocus={status => setSearchFocus(status)} />
@@ -91,20 +104,28 @@ function SearchView() {
             </Text>
           </Box>) : (
           <Box p={30} flex={1}>
-            <FlatList
-              data={DATA}
-              renderItem={({ item }) => (
-                <CardContainer>
-                  <Card>
-                    {item.title}
-                  </Card>
-                  <CardSummary>
-                    {item.summary}
-                  </CardSummary>
-                </CardContainer>
-              )}
-              keyExtractor={item => item.title}
-            />
+            <CardContainer onPress={() => navigation.navigate("Detail")}>
+              <Card>
+                on para
+              </Card>
+              <CardSummary>
+                çok az (para).
+              </CardSummary>
+            </CardContainer>
+            {/*<FlatList*/}
+            {/*  data={DATA}*/}
+            {/*  renderItem={({ item }) => (*/}
+            {/*    <CardContainer>*/}
+            {/*      <Card>*/}
+            {/*        {item.title}*/}
+            {/*      </Card>*/}
+            {/*      <CardSummary>*/}
+            {/*        {item.summary}*/}
+            {/*      </CardSummary>*/}
+            {/*    </CardContainer>*/}
+            {/*  )}*/}
+            {/*  keyExtractor={item => item.title}*/}
+            {/*/>*/}
           </Box>)}
       </Box>
     </Box>
