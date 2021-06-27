@@ -7,6 +7,8 @@ import bg from "../assets/bg.jpeg";
 import Text from "../components/Text";
 import { useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";
+import Background from "../components/background";
+import Card from "../components/card";
 
 
 function SearchView() {
@@ -38,16 +40,14 @@ function SearchView() {
       <Box as={Animated.View} position="relative" zIndex={1} height={heroHeightAnim}>
 
         {!isSearchFocus && (
-          <Box as={ImageBackground}
-               source={bg}
-               style={{ width: "100%", height: "100%" }}
-          >
+          <Background>
             <Box flex={1}
                  alignItems="center"
                  justifyContent="center">
               <Logo color="white" width={120} />
             </Box>
-          </Box>)}
+          </Background>
+        )}
 
 
         <Box position="absolute" left={0} bottom={isSearchFocus ? 0 : -42} p={16} width="100%">
@@ -64,9 +64,9 @@ function SearchView() {
             </Text>
           </Box>) : (
           <Box p={30} flex={1}>
-            <Text>
-              Öneri
-            </Text>
+            <Card>
+              Merhaba
+            </Card>
           </Box>)}
       </Box>
     </Box>
