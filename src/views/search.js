@@ -1,4 +1,4 @@
-import { StatusBar, Animated } from "react-native";
+import { StatusBar, Animated, FlatList } from "react-native";
 import * as React from "react";
 import { Logo } from "../components/icons";
 import SearchBox from "../components/SearchBox";
@@ -11,6 +11,32 @@ import Card from "../components/card";
 import CardSummary from "../components/cardSummary";
 import CardContainer from "../components/cardContainer";
 
+const DATA = [
+  {
+    title: "First Item",
+    summary: "First Summary",
+  },
+  {
+    title: "Second Item",
+    summary: "Second Summary",
+  },
+  {
+    title: "Third Item",
+    summary: "Third Summary",
+  },
+  {
+    title: "First Item",
+    summary: "First Summary",
+  },
+  {
+    title: "Second Item",
+    summary: "Second Summary",
+  },
+  {
+    title: "Third Item",
+    summary: "Third Summary",
+  },
+];
 
 function SearchView() {
 
@@ -65,22 +91,20 @@ function SearchView() {
             </Text>
           </Box>) : (
           <Box p={30} flex={1}>
-            <CardContainer>
-              <Card>
-                on para
-              </Card>
-              <CardSummary>
-                çok az (para).
-              </CardSummary>
-            </CardContainer>
-            <CardContainer>
-              <Card>
-                on para
-              </Card>
-              <CardSummary>
-                çok az (para).
-              </CardSummary>
-            </CardContainer>
+            <FlatList
+              data={DATA}
+              renderItem={({ item }) => (
+                <CardContainer>
+                  <Card>
+                    {item.title}
+                  </Card>
+                  <CardSummary>
+                    {item.summary}
+                  </CardSummary>
+                </CardContainer>
+              )}
+              keyExtractor={item => item.title}
+            />
           </Box>)}
       </Box>
     </Box>
