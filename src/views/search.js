@@ -1,14 +1,15 @@
-import { ImageBackground, StatusBar, Animated } from "react-native";
+import { StatusBar, Animated } from "react-native";
 import * as React from "react";
 import { Logo } from "../components/icons";
 import SearchBox from "../components/SearchBox";
 import Box from "../components/box";
-import bg from "../assets/bg.jpeg";
 import Text from "../components/Text";
 import { useFocusEffect } from "@react-navigation/native";
 import { useState } from "react";
 import Background from "../components/background";
 import Card from "../components/card";
+import CardSummary from "../components/cardSummary";
+import CardContainer from "../components/cardContainer";
 
 
 function SearchView() {
@@ -56,7 +57,7 @@ function SearchView() {
 
       </Box>
 
-      <Box flex={1} bg="white" pt={isSearchFocus ? 0 : 26}>
+      <Box flex={1} bg="softGrey" pt={isSearchFocus ? 0 : 26}>
         {isSearchFocus ? (
           <Box p={30} flex={1}>
             <Text>
@@ -64,9 +65,22 @@ function SearchView() {
             </Text>
           </Box>) : (
           <Box p={30} flex={1}>
-            <Card>
-              Merhaba
-            </Card>
+            <CardContainer>
+              <Card>
+                on para
+              </Card>
+              <CardSummary>
+                çok az (para).
+              </CardSummary>
+            </CardContainer>
+            <CardContainer>
+              <Card>
+                on para
+              </Card>
+              <CardSummary>
+                çok az (para).
+              </CardSummary>
+            </CardContainer>
           </Box>)}
       </Box>
     </Box>

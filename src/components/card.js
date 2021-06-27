@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import Text from "./Text";
-import Box from "./box";
 
 function Card({ children }) {
   return (
