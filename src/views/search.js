@@ -10,6 +10,7 @@ import Background from "../components/background";
 import Card from "../components/card";
 import CardSummary from "../components/cardSummary";
 import CardContainer from "../components/cardContainer";
+import SimpleCard from "../components/simpleCard";
 
 const DATA = [
   {
@@ -49,23 +50,23 @@ function SearchView({ navigation }) {
       Animated.timing(bgOpacity, {
         toValue: 0,
         duration: 320,
-        useNativeDriver: false
+        useNativeDriver: false,
       }).start();
       Animated.timing(heroHeightAnim, {
         toValue: 124,
         duration: 320,
-        useNativeDriver: false
+        useNativeDriver: false,
       }).start();
     } else {
       Animated.timing(bgOpacity, {
         toValue: 1,
         duration: 320,
-        useNativeDriver: false
+        useNativeDriver: false,
       }).start();
       Animated.timing(heroHeightAnim, {
         toValue: 285,
         duration: 320,
-        useNativeDriver: false
+        useNativeDriver: false,
       }).start();
     }
   }, [heroHeightAnim, isSearchFocus, bgOpacity]);
@@ -80,9 +81,9 @@ function SearchView({ navigation }) {
     <Box flex={1}>
       <Box as={Animated.View} position="relative" zIndex={1} height={heroHeightAnim}>
 
-        <Box as={Animated.View} opacity={bgOpacity}>
+        <Box as={Animated.View} opacity={bgOpacity} mt={-60}>
           <Background>
-            <Box flex={1}
+            <Box pt={60} flex={1}
                  alignItems="center"
                  justifyContent="center">
               <Logo color="white" width={120} />
@@ -99,9 +100,16 @@ function SearchView({ navigation }) {
       <Box flex={1} bg="softGrey" pt={isSearchFocus ? 0 : 26}>
         {isSearchFocus ? (
           <Box p={30} flex={1}>
-            <Text>
-              History
-            </Text>
+            <FlatList
+              keyExtractor={item => item.title}
+              data={DATA}
+              renderItem={({ item }) => (
+                <SimpleCard>
+                  {item.title}
+                </SimpleCard>
+              )}
+              ListHeaderComponent={<Text color="textLight" mb={12} > Son Aramalar </Text>}
+            />
           </Box>) : (
           <Box p={30} flex={1}>
             <CardContainer onPress={() => navigation.navigate("Detail")}>
@@ -112,6 +120,7 @@ function SearchView({ navigation }) {
                 çok az (para).
               </CardSummary>
             </CardContainer>
+
             {/*<FlatList*/}
             {/*  data={DATA}*/}
             {/*  renderItem={({ item }) => (*/}
