@@ -7,7 +7,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ThemeProvider } from "styled-components";
 
 import theme from "./components/utils/theme";
-import {Left, More} from "./components/icons";
+import { Left, More } from "./components/icons";
 
 import SearchView from "./views/search";
 import HistoryView from "./views/history";
@@ -28,29 +28,33 @@ function SearchStack() {
         component={SearchView}
         options={() => {
           return {
-            headerShown: false
+            headerShown: false,
           };
         }}
       />
       <HomeStack.Screen
         name="Detail"
         component={DetailView}
-        options={({route,navigation}) => {
+        options={({ route, navigation }) => {
           return {
             headerShown: true,
-            title: (route.params && route.params.title) || 'Bos',
+            title: (route.params && route.params.title) || "Bos",
             headerStyle: {
               backgroundColor: theme.colors.softGrey,
-              shadowColor: 'transparent'
+              shadowColor: "transparent",
             },
             headerLeft: () =>
-              (<Button px={20} height="100%" onPress={()=>{navigation.navigate('Search')}}>
-                <Left color={theme.colors.textDark}/>
+              (<Button px={20} height="100%" onPress={() => {
+                navigation.navigate("Search");
+              }}>
+                <Left color={theme.colors.textDark} />
               </Button>),
             headerRight: () =>
-              (<Button px={20} height="100%" onPress={()=>{navigation.navigate('Search')}}>
-                <More color={theme.colors.textDark}/>
-              </Button>)
+              (<Button px={20} height="100%" onPress={() => {
+                navigation.navigate("Search");
+              }}>
+                <More color={theme.colors.textDark} />
+              </Button>),
           };
         }}
       />
