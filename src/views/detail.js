@@ -10,9 +10,8 @@ function DetailView() {
       StatusBar.setBarStyle('dark-content')
     },[]));
 
-
   return (
-    <Box as={SafeAreaView} flex={1}>
+    <Box as={SafeAreaView} flex={1} p={16} bg="softGrey">
       <Text>Details</Text>
     </Box>
   );

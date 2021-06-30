@@ -112,7 +112,7 @@ function SearchView({ navigation }) {
             />
           </Box>) : (
           <Box p={30} flex={1}>
-            <CardContainer onPress={() => navigation.navigate("Detail")}>
+            <CardContainer onPress={() => navigation.navigate("Detail", {title: "on para"})}>
               <Card>
                 on para
               </Card>
