@@ -7,6 +7,7 @@ import Box from "./box";
 function ActionButton({ children, ...props }) {
   return (
     <Button
+      minWidth="actionButton"
       height="actionButton"
       bg="white"
       borderRadius="full"
