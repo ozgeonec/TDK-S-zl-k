@@ -1,4 +1,4 @@
-import { StatusBar, Animated, FlatList } from "react-native";
+import { StatusBar, Animated, FlatList, ActivityIndicator } from "react-native";
 import * as React from "react";
 import { Logo } from "../components/icons";
 import SearchBox from "../components/SearchBox";
@@ -44,6 +44,16 @@ function SearchView({ navigation }) {
   const [isSearchFocus, setSearchFocus] = React.useState(false);
   const [heroHeightAnim] = useState(new Animated.Value(285));
   const [bgOpacity] = useState(new Animated.Value(1));
+  const [homeData, setHomeData] = useState({});
+
+  const getHomeData = async () => {
+    const response = await fetch("https://sozluk.gov.tr/icerik");
+    const data = await response.json();
+    setHomeData(data);
+  };
+  React.useEffect(()=>{
+    getHomeData();
+  },[])
 
   React.useEffect(() => {
     if (isSearchFocus) {
@@ -113,12 +123,18 @@ function SearchView({ navigation }) {
           </Box>) : (
           <Box p={30} flex={1}>
             <CardContainer onPress={() => navigation.navigate("Detail", {title: "on para"})}>
-              <Card>
-                on para
-              </Card>
-              <CardSummary>
-                çok az (para).
-              </CardSummary>
+              {homeData ? (
+                <>
+                  <Card>
+                    {homeData?.kelime[0].madde}
+                  </Card>
+                  <CardSummary>
+                    {homeData?.kelime[0].anlam}
+                  </CardSummary>
+                </>
+              ):(
+                <ActivityIndicator/>
+              )}
             </CardContainer>
 
             {/*<FlatList*/}
