@@ -38,7 +38,7 @@ function SearchStack() {
         options={({ route, navigation }) => {
           return {
             headerShown: true,
-            title: (route.params && route.params.title) || "Bos",
+            title: route.params?.title,
             headerStyle: {
               backgroundColor: theme.colors.softGrey,
               shadowColor: "transparent",
