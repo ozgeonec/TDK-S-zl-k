@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import Text from "./Text";
 
-function Card({ children }) {
+function CardTitle({ children }) {
   return (
       <Text
         fontSize={18}
@@ -13,4 +13,4 @@ function Card({ children }) {
   )
 }
 
-export default Card;
+export default CardTitle;

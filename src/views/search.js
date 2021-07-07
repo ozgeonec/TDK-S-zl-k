@@ -1,160 +1,91 @@
-import { StatusBar, Animated, FlatList, ActivityIndicator } from "react-native";
-import * as React from "react";
-import { Logo } from "../components/icons";
-import SearchBox from "../components/SearchBox";
-import Box from "../components/box";
-import Text from "../components/Text";
-import { useFocusEffect } from "@react-navigation/native";
-import { useState } from "react";
-import Background from "../components/background";
-import Card from "../components/card";
-import CardSummary from "../components/cardSummary";
-import CardContainer from "../components/cardContainer";
-import SimpleCard from "../components/simpleCard";
+import * as React from 'react'
+import { StatusBar } from 'react-native'
+import SafeAreaView from 'react-native-safe-area-view'
+import { useFocusEffect } from '@react-navigation/native'
+
+import Box from '../components/box'
+import SuggestionCard from '../components/suggestion-card'
+import SearchHistoryList from '../components/search-history-list'
+import HomeSearch from '../components/home-search'
 
 const DATA = [
   {
-    title: "First Item",
-    summary: "First Summary",
+    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+    title: 'First Item 1',
+    summary: 'açıklama 1'
   },
   {
-    title: "Second Item",
-    summary: "Second Summary",
+    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    title: 'Second Item 2',
+    summary: 'açıklama 2'
   },
   {
-    title: "Third Item",
-    summary: "Third Summary",
-  },
-  {
-    title: "First Item",
-    summary: "First Summary",
-  },
-  {
-    title: "Second Item",
-    summary: "Second Summary",
-  },
-  {
-    title: "Third Item",
-    summary: "Third Summary",
-  },
-];
+    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    title: 'Third Item 3',
+    summary: 'açıklama 3'
+  }
+]
 
 function SearchView({ navigation }) {
-
-  const [isSearchFocus, setSearchFocus] = React.useState(false);
-  const [heroHeightAnim] = useState(new Animated.Value(285));
-  const [bgOpacity] = useState(new Animated.Value(1));
-  const [homeData, setHomeData] = useState({});
+  const [isSearchFocus, setSearchFocus] = React.useState(false)
+  const [homeData, setHomeData] = React.useState(null)
 
   const getHomeData = async () => {
-    const response = await fetch("https://sozluk.gov.tr/icerik");
-    const data = await response.json();
-    setHomeData(data);
-  };
-  React.useEffect(()=>{
-    getHomeData();
-  },[])
+    const response = await fetch('https://sozluk.gov.tr/icerik')
+    const data = await response.json()
+    setHomeData(data)
+  }
 
   React.useEffect(() => {
-    if (isSearchFocus) {
-      Animated.timing(bgOpacity, {
-        toValue: 0,
-        duration: 320,
-        useNativeDriver: false,
-      }).start();
-      Animated.timing(heroHeightAnim, {
-        toValue: 124,
-        duration: 320,
-        useNativeDriver: false,
-      }).start();
-    } else {
-      Animated.timing(bgOpacity, {
-        toValue: 1,
-        duration: 320,
-        useNativeDriver: false,
-      }).start();
-      Animated.timing(heroHeightAnim, {
-        toValue: 285,
-        duration: 320,
-        useNativeDriver: false,
-      }).start();
-    }
-  }, [heroHeightAnim, isSearchFocus, bgOpacity]);
+    getHomeData()
+  }, [])
 
   useFocusEffect(
     React.useCallback(() => {
-      StatusBar.setBarStyle(isSearchFocus ? "dark-content" : "light-content");
-    }, [isSearchFocus]),
-  );
+      StatusBar.setBarStyle(isSearchFocus ? 'dark-content' : 'light-content')
+    }, [isSearchFocus])
+  )
 
   return (
-    <Box flex={1}>
-      <Box as={Animated.View} position="relative" zIndex={1} height={heroHeightAnim}>
+    <Box as={SafeAreaView} bg="red" flex={1}>
+      {/* Header */}
+      <HomeSearch
+        isSearchFocus={isSearchFocus}
+        onSearchFocus={setSearchFocus}
+      />
 
-        <Box as={Animated.View} opacity={bgOpacity} mt={-60}>
-          <Background>
-            <Box pt={60} flex={1}
-                 alignItems="center"
-                 justifyContent="center">
-              <Logo color="white" width={120} />
-            </Box>
-          </Background>
-        </Box>
-
-        <Box position="absolute" left={0} bottom={isSearchFocus ? 0 : -42} p={16} width="100%">
-          <SearchBox onChangeFocus={status => setSearchFocus(status)} />
-        </Box>
-
-      </Box>
-
+      {/* content */}
       <Box flex={1} bg="softGrey" pt={isSearchFocus ? 0 : 26}>
         {isSearchFocus ? (
-          <Box p={30} flex={1}>
-            <FlatList
-              keyExtractor={item => item.title}
-              data={DATA}
-              renderItem={({ item }) => (
-                <SimpleCard>
-                  {item.title}
-                </SimpleCard>
-              )}
-              ListHeaderComponent={<Text color="textLight" mb={12} > Son Aramalar </Text>}
+          <Box flex={1}>
+            <SearchHistoryList data={DATA} />
+          </Box>
+        ) : (
+          <Box px={16} py={40} flex={1}>
+            <SuggestionCard
+              data={homeData?.kelime[0]}
+              title="Bir Kelime"
+              onPress={() =>
+                navigation.navigate('Detail', {
+                  keyword: homeData?.kelime[0].madde
+                })
+              }
             />
-          </Box>) : (
-          <Box p={30} flex={1}>
-            <CardContainer onPress={() => navigation.navigate("Detail", {title: "on para"})}>
-              {homeData ? (
-                <>
-                  <Card>
-                    {homeData?.kelime[0].madde}
-                  </Card>
-                  <CardSummary>
-                    {homeData?.kelime[0].anlam}
-                  </CardSummary>
-                </>
-              ):(
-                <ActivityIndicator/>
-              )}
-            </CardContainer>
-
-            {/*<FlatList*/}
-            {/*  data={DATA}*/}
-            {/*  renderItem={({ item }) => (*/}
-            {/*    <CardContainer>*/}
-            {/*      <Card>*/}
-            {/*        {item.title}*/}
-            {/*      </Card>*/}
-            {/*      <CardSummary>*/}
-            {/*        {item.summary}*/}
-            {/*      </CardSummary>*/}
-            {/*    </CardContainer>*/}
-            {/*  )}*/}
-            {/*  keyExtractor={item => item.title}*/}
-            {/*/>*/}
-          </Box>)}
+            <SuggestionCard
+              mt={40}
+              data={homeData?.atasoz[0]}
+              title="Bir Deyim - Atasözü"
+              onPress={() =>
+                navigation.navigate('Detail', {
+                  keyword: homeData?.atasoz[0].madde
+                })
+              }
+            />
+          </Box>
+        )}
       </Box>
     </Box>
-  );
+  )
 }
 
-export default SearchView;
+export default SearchView
